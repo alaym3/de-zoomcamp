@@ -36,9 +36,71 @@ to make it executable everywhere, not just bin, need to add it to the .bashrc ex
 export PATH="${HOME}/bin:${PATH}"
 
 
-(base) am@de-zoomcamp:~/data-engineering-zoomcamp$ git branch -a
-* main
-  remotes/origin/HEAD -> origin/main
-  remotes/origin/main
-  remotes/origin/week1
-(base) am@de-zoomcamp:~/data-engineering-zoomcamp$ git checkout -b  remotes/origin/week1
+clone repo
+
+docker-compose up -d (-d means detached)
+
+instal pgcli - pip instal pgcli
+
+pgcli -h localhost -U root -d ny_taxi
+
+\dt shows the schema
+
+now let's be good and use conda 
+
+
+ctrl ~ opens the terminal!!!
+
+how do we forward the port in the VM locally? 5432?
+- we open vscode through ssh, into de-zoomcamp
+- we open a terminal and then click ports, and input port 5432
+
+now we open a new terminal and we can simply use port 5432 and it works.
+pgcli -h localhost -U root -d ny_taxi
+
+the data isnt in the table in the vm, so i re-ran ingest_data in the VM.
+python ingest_data.py \
+    --user=root \
+    --password=root \
+    --host=localhost \
+    --port=5432 \
+    --db=ny_taxi \
+    --table_name=yellow_taxi_trips \
+    --url="https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.parquet"
+
+ok now in a local terminal run pgcli -h localhost -U root -d ny_taxi
+but error: connection failed: :1), port 5432 failed: could not receive data from server: Connection refused
+ do this instead! 
+ pgcli -h 127.0.0.1 -p 5432 -U root -d ny_taxi
+
+ then add 8080 as another port so that we can go to the browser and use pgadmin
+
+then add 8888 port to use jupyter from the terminal. write jupyter notebook and copy link in local browser.
+
+and now we are running the upload-data script so that we can upload the data to the postgres- which i did earlier lol.
+
+the final thing is install tf, inside /bin. 
+wget https://releases.hashicorp.com/terraform/1.7.1/terraform_1.7.1_linux_amd64.zip
+unzip 
+sudo apt-get install unzip
+
+we need creds in our VM in order to use our creds. our json file needs to get inside there.
+sftp can be used to transfer
+creds.json 
+
+sftp de-zoomcamp
+mkdir .keys
+cd to keys
+put creds.json
+
+now config gcloud cli credentials
+export GOOGLE_APPLICATION_CREDENTIALS=~/.keys/creds.json
+gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
+
+now we can terraform init
+terraform plan doesnt work bc it cant find the credentials. comment out the creds info from main and it works bc we just authed in.
+
+stop the VM by sudo shutdown now
+
+if you shut it down and restart, you need to copy the new external IP and put it inside .ssh/config
+nano .ssh/config and put in hew host in HostName.
