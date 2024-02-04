@@ -57,3 +57,8 @@ terraform.rc
 
 creds*
 *.parquet
+
+
+*.csv*
+
+01-docker-terraform/homework/week1_hw_postgres_data/*

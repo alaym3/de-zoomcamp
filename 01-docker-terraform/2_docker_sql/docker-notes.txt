@@ -86,6 +86,8 @@ docker build -t taxi_ingest:v001 .
 -- now have to pass in the parameters from before.
 -- when using pg-network we will put in the host as pg-database
 
+docker build -t taxi_ingest:v001 .
+
 docker run -it \
   --network=pg-network \
   taxi_ingest:v001 \
