@@ -23,12 +23,20 @@ print(f'Job finished successfully for day {day}.')
 
 docker run -it test:pandas 2023-01-01
 
+-- work laptop
 ssh-keygen -t rsa -f ~/.ssh/de_gcp -C am -b 2048
 
+
+-- ON WORK LAPTOP
 Your identification has been saved in /Users/alainamartinez/.ssh/de_gcp
 Your public key has been saved in /Users/alainamartinez/.ssh/de_gcp.pub
 
-- put public key on gcp
+migrate that to PC so that i can have the same things downloaded in the vm.
+
+
+- put public key on gcp - go to metadata ssh keys.
+
+  
 
 - create VM and find the external IP - 104.155.28.182. use the private key and your user.
   ssh -i ~/.ssh/de_gcp am@104.155.28.182
