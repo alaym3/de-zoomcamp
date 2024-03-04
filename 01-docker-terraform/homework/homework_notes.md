@@ -161,3 +161,29 @@ WHERE
 	AND pickup_zones. "Zone" = 'Astoria'
 ORDER BY
 	tip_amount DESC;
+
+
+
+
+for terraform in the vm: 
+config gcloud cli credentials
+export GOOGLE_APPLICATION_CREDENTIALS=~/.keys/creds.json
+gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
+
+
+and remove creds from main.
+
+
+terraform apply :
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+google_bigquery_dataset.demo_dataset: Creating...
+google_storage_bucket.demo-bucket: Creating...
+google_storage_bucket.demo-bucket: Creation complete after 3s [id=atomic-airship-410619-terra-bucket]
+google_bigquery_dataset.demo_dataset: Creation complete after 3s [id=projects/atomic-airship-410619/datasets/demo_dataset]
+

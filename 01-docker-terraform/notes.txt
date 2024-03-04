@@ -93,7 +93,8 @@ mkdir .keys
 cd to keys
 put creds.json
 
-now config gcloud cli credentials
+now 
+config gcloud cli credentials
 export GOOGLE_APPLICATION_CREDENTIALS=~/.keys/creds.json
 gcloud auth activate-service-account --key-file $GOOGLE_APPLICATION_CREDENTIALS
 

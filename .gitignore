@@ -62,3 +62,5 @@ creds*
 *.csv*
 
 01-docker-terraform/homework/week1_hw_postgres_data/*
+
+*.json
